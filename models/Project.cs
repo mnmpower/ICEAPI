@@ -8,7 +8,7 @@ namespace ICE_API.models
         [Key]
         public int ProjectID { get; set; }
         public string Title { get; set; }
-        public string IFrame { get; set; }
+        public string EmbeddedURL { get; set; }
         public string Description { get; set; }
         public int PersonID { get; set; }
 
