@@ -32,6 +32,7 @@ namespace ICE_API.models
                 new Person { PersonID = 1, FirstName = "Maarten", LastName = "Michiels", Email = "m@m.be" },
                 new Person { PersonID = 2, FirstName = "Benji", LastName = "Virus", Email = "m@m.be" }
                 );
+                context.SaveChanges();
             }
             else
             {
@@ -44,6 +45,7 @@ namespace ICE_API.models
                 context.Projects.AddRange(
                 new Project { ProjectID = 1, PersonID = 1, Title = "First project", Description = "First project to help people with corona at home", EmbeddedURL = "https://www.youtube.com/embed/mNpQ3u56C3M" }
                 );
+                context.SaveChanges();
 
             }
             else

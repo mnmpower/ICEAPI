@@ -27,7 +27,7 @@ namespace ICE_API
             var password = Configuration["DBPassword"] ?? "R1234-56";
             var database = Configuration["Database"] ?? "ICEWireDB";
 
-            services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server={server},{port};Inital Catalog={database};User ID ={user};Password={password}"));
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server={server},{port};Initial Catalog={database};User ID ={user};Password={password}"));
 
             services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });
         }
