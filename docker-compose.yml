@@ -10,5 +10,7 @@ services:
             - "1433:1433"
     ice-api:
         build: .
+        environment:
+            DBServer: "ms-sql-server"
         ports:
             - "8080:80"
