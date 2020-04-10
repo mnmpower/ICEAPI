@@ -21,7 +21,14 @@ namespace ICE_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var server = Configuration["DBServer"] ?? "localhost";
+            var port = Configuration["DBPort"] ?? "1433";
+            var user = Configuration["DBUser"] ?? "SA";
+            var password = Configuration["DBPassword"] ?? "R1234-56";
+            var database = Configuration["Database"] ?? "ICEWireDB";
+
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server={server},{port};Inital Catalog={database};User ID ={user};Password={password}"));
+
             services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });
         }
 
@@ -48,6 +55,8 @@ namespace ICE_API
             {
                 endpoints.MapControllers();
             });
+
+            PrepDB.PrepareDB(app);
 
         }
     }

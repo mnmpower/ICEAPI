@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ICE_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200409152819_Update-Model-Project")]
-    partial class UpdateModelProject
+    [Migration("20200410093024_project-person-models")]
+    partial class projectpersonmodels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,22 +39,6 @@ namespace ICE_API.Migrations
                     b.HasKey("PersonID");
 
                     b.ToTable("Person");
-
-                    b.HasData(
-                        new
-                        {
-                            PersonID = 1,
-                            Email = "m@m.be",
-                            FirstName = "Maarten",
-                            LastName = "Michiels"
-                        },
-                        new
-                        {
-                            PersonID = 2,
-                            Email = "m@m.be",
-                            FirstName = "Benji",
-                            LastName = "Virus"
-                        });
                 });
 
             modelBuilder.Entity("ICE_API.models.Project", b =>
@@ -81,15 +65,6 @@ namespace ICE_API.Migrations
                     b.HasIndex("PersonID");
 
                     b.ToTable("Project");
-
-                    b.HasData(
-                        new
-                        {
-                            ProjectID = 1,
-                            Description = "First project",
-                            EmbeddedURL = "https://www.youtube.com/embed/mNpQ3u56C3M",
-                            PersonID = 1
-                        });
                 });
 
             modelBuilder.Entity("ICE_API.models.Project", b =>

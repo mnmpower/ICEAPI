@@ -2,7 +2,7 @@
 
 namespace ICE_API.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class projectpersonmodels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace ICE_API.Migrations
                     ProjectID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
-                    IFrame = table.Column<string>(nullable: true),
+                    EmbeddedURL = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     PersonID = table.Column<int>(nullable: false)
                 },
