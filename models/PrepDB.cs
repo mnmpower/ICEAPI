@@ -29,8 +29,8 @@ namespace ICE_API.models
             {
                 System.Console.WriteLine("No People found - seeding Peoples in DB ...");
                 context.People.AddRange(
-                new Person { PersonID = 1, FirstName = "Maarten", LastName = "Michiels", Email = "m@m.be" },
-                new Person { PersonID = 2, FirstName = "Benji", LastName = "Virus", Email = "m@m.be" }
+                new Person { FirstName = "Maarten", LastName = "Michiels", Email = "m@m.be" },
+                new Person { FirstName = "Benji", LastName = "Virus", Email = "m@m.be" }
                 );
                 context.SaveChanges();
             }
@@ -43,7 +43,7 @@ namespace ICE_API.models
             {
                 System.Console.WriteLine("No Projects found - seeding Projects in DB ...");
                 context.Projects.AddRange(
-                new Project { ProjectID = 1, PersonID = 1, Title = "First project", Description = "First project to help people with corona at home", EmbeddedURL = "https://www.youtube.com/embed/mNpQ3u56C3M" }
+                new Project { PersonID = 1, Title = "First project", Description = "First project to help people with corona at home", EmbeddedURL = "https://www.youtube.com/embed/mNpQ3u56C3M" }
                 );
                 context.SaveChanges();
 
