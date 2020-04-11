@@ -23,11 +23,11 @@ namespace ICE_API
         {
             var server = Configuration["DBServer"] ?? "ms-sql-server";
             var port = Configuration["DBPort"] ?? "1433";
-            var user = Configuration["DBUser"] ?? "SA";
+            var user = Configuration["DBUser"] ?? "Benji";
             var password = Configuration["DBPassword"] ?? "R1234-56";
             var database = Configuration["Database"] ?? "ICEWireDB";
 
-            services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server={server},{port};Initial Catalog={database};User ID ={user};Password={password}"));
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server=tcp:icewire.database.windows.net,1433;Initial Catalog=ICEWireDB;Persist Security Info=False;User ID=Benji;Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
 
             services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });
         }
