@@ -25,6 +25,8 @@ namespace ICE_API.models
 
             context.Database.Migrate();
 
+            System.Console.WriteLine("Migrations done...");
+
             if (!context.People.Any())
             {
                 System.Console.WriteLine("No People found - seeding Peoples in DB ...");
