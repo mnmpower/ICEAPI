@@ -11,6 +11,5 @@ RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
-EXPOSE 80
 COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "ICE-API.dll"]
+ENTRYPOINT ["dotnet", "ICE-API.dll", "--urls", "http://0.0.0.0:5000"]
