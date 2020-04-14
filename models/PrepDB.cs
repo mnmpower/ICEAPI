@@ -43,8 +43,14 @@ namespace ICE_API.models
             {
                 System.Console.WriteLine("No Projects found - seeding Projects in DB ...");
                 context.Projects.AddRange(
-                new Project { PersonID = 1, Title = "First project", Description = "First project to help people with corona at home", EmbeddedURL = "https://www.youtube.com/embed/mNpQ3u56C3M" }
-                );
+                new Project { 
+                    PersonID = 1, 
+                    Title = "Origami - konijn", 
+                    Description = "Het eerste filmpje in de reeks \"Origami\". We laten hier zien hoe je een konijn kan maken met behulp van enkel een vierkant blaadje papier.", 
+                    Link = "https://youtu.be/1eojwlsq5o0", 
+                    Img = "origami-konijn.png", 
+                    datum = "13/03/2020"
+                });
                 context.SaveChanges();
 
             }

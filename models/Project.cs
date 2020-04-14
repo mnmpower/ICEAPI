@@ -7,9 +7,11 @@ namespace ICE_API.models
     {
         [Key]
         public int ProjectID { get; set; }
-        public string Title { get; set; }
-        public string EmbeddedURL { get; set; }
         public string Description { get; set; }
+        public string Link { get; set; }
+        public string Img { get; set; }
+        public string Title { get; set; }
+        public string datum { get; set; }
         public int PersonID { get; set; }
 
         [ForeignKey("PersonID")]
