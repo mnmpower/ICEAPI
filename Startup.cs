@@ -35,9 +35,10 @@ namespace ICE_API
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("*")
+                                      builder
                                       .AllowAnyHeader()
-                                      .AllowAnyMethod(); ;
+                                      .AllowAnyMethod()
+                                      .AllowAnyOrigin();
                                   });
             });
 
