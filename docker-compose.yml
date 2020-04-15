@@ -4,8 +4,9 @@ services:
         image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
         environment:
             ACCEPT_EULA: "Y"
-            SA_PASSWORD: R1234-56
+            SA_PASSWORD: "rR1234-56!"
             MSSQL_PID: Express
+            MYSQL_DATABASE: ICEWireDB
         ports: 
             - "1433:1433"
     ice-api:
@@ -13,4 +14,4 @@ services:
         environment:
             DBServer: "ms-sql-server"
         ports:
-            - "8080:80"
+            - "5000:5000"

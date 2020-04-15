@@ -22,16 +22,15 @@ namespace ICE_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var server = Configuration["DBServer"] ?? "ms-sql-server";
+            var server = Configuration["DBServer"] ?? "192.168.99.100,1433";
             var port = Configuration["DBPort"] ?? "1433";
-            //var user = Configuration["DBUser"] ?? "Benji";
             var user = Configuration["DBUser"] ?? "SA";
-            var password = Configuration["DBPassword"] ?? "R1234-56";
+            var password = Configuration["DBPassword"] ?? "rR1234-56!";
             var database = Configuration["Database"] ?? "ICEWireDB";
 
             //services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server=tcp:icewire.database.windows.net,1433;Initial Catalog=ICEWireDB;Persist Security Info=False;User ID=Benji;Password={password};MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
-            services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server={server}, port={port}; Initial Catalog={database};User ID={user};Password={password}"));
-
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server={server}; Initial Catalog={database};User ID={user};Password={password}"));
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
