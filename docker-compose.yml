@@ -6,7 +6,6 @@ services:
             ACCEPT_EULA: "Y"
             SA_PASSWORD: "rR1234-56!"
             MSSQL_PID: Express
-            MYSQL_DATABASE: ICEWireDB
         ports: 
             - "1433:1433"
     ice-api:
