@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ICE_API.models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ICE_API.Controllers
 {
@@ -44,6 +45,7 @@ namespace ICE_API.Controllers
         // PUT: api/Projects/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProject(int id, Project project)
         {
@@ -76,6 +78,7 @@ namespace ICE_API.Controllers
         // POST: api/Projects
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Project>> PostProject(Project project)
         {
@@ -86,6 +89,7 @@ namespace ICE_API.Controllers
         }
 
         // DELETE: api/Projects/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Project>> DeleteProject(int id)
         {

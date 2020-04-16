@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ICE_API.models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ICE_API.Controllers
 {

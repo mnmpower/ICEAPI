@@ -11,11 +11,13 @@ namespace ICE_API.models
 
         public DbSet<Person> People { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>().ToTable("Person");
             modelBuilder.Entity<Project>().ToTable("Project");
+            modelBuilder.Entity<Admin>().ToTable("Admin");
 
            
         }

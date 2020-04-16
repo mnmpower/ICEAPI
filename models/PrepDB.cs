@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,22 @@ namespace ICE_API.models
             context.Database.Migrate();
 
             System.Console.WriteLine("Migrations done...");
+
+            if (!context.Admins.Any())
+            {
+                System.Console.WriteLine("No Admins found - seeding Admins in DB ...");
+
+                var sha1 = new SHA1CryptoServiceProvider();
+
+                context.Admins.AddRange(
+                new Admin { FirstName = "Maarten", LastName = "Michiels", Email = "maarten.michiels@icewire.be", Password= Convert.ToBase64String(sha1.ComputeHash(Encoding.ASCII.GetBytes("rR1234-56!"))) }
+                );
+                context.SaveChanges();
+            }
+            else
+            {
+                System.Console.WriteLine("Admins already seeded ...");
+            }
 
             if (!context.People.Any())
             {
