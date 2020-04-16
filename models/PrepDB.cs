@@ -36,7 +36,12 @@ namespace ICE_API.models
                 var sha1 = new SHA1CryptoServiceProvider();
 
                 context.Admins.AddRange(
-                new Admin { FirstName = "Maarten", LastName = "Michiels", Email = "maarten.michiels@icewire.be", Password= Convert.ToBase64String(sha1.ComputeHash(Encoding.ASCII.GetBytes("rR1234-56!"))) }
+                new Admin { FirstName = "Maarten", LastName = "Michiels", Email = "maarten.michiels@icewire.be", Password= Convert.ToBase64String(sha1.ComputeHash(Encoding.ASCII.GetBytes("rR1234-56!"))) },
+                new Admin { FirstName = "Benjamin", LastName = "Bruyns", Email = "benjamin.bruyns@icewire.be", Password= Convert.ToBase64String(sha1.ComputeHash(Encoding.ASCII.GetBytes("rR1234-56!"))) },
+                new Admin { FirstName = "Laure", LastName = "Nys", Email = "laure.nys@icewire.be", Password= Convert.ToBase64String(sha1.ComputeHash(Encoding.ASCII.GetBytes("rR1234-56!"))) },
+                new Admin { FirstName = "Roel", LastName = "Janssen", Email = "roel.janssen@icewire.be", Password= Convert.ToBase64String(sha1.ComputeHash(Encoding.ASCII.GetBytes("rR1234-56!"))) },
+                new Admin { FirstName = "Lukas", LastName = "Boonen", Email = "lukas.boonen@icewire.be", Password= Convert.ToBase64String(sha1.ComputeHash(Encoding.ASCII.GetBytes("rR1234-56!"))) },
+                new Admin { FirstName = "Ward", LastName = "Beyens", Email = "ward.beyens@icewire.be", Password= Convert.ToBase64String(sha1.ComputeHash(Encoding.ASCII.GetBytes("rR1234-56!"))) }
                 );
                 context.SaveChanges();
             }
