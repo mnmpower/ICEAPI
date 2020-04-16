@@ -23,13 +23,12 @@ namespace ICE_API
         }
 
         public IConfiguration Configuration { get; }
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
 
@@ -65,17 +64,12 @@ namespace ICE_API
             //services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server=tcp:icewire.database.windows.net,1433;Initial Catalog=ICEWireDB;Persist Security Info=False;User ID=Benji;Password={password};MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer($"Server={server},{port}; Initial Catalog={database};User ID={user};Password={password}"));
 
-            services.AddCors(options =>
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder
-                                      .AllowAnyHeader()
-                                      .AllowAnyMethod()
-                                      .AllowAnyOrigin();
-                                  });
-            });
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddControllers().AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });
         }
@@ -97,7 +91,7 @@ namespace ICE_API
 
             app.UseRouting();
 
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors("MyPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
