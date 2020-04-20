@@ -13,9 +13,14 @@ namespace ICE_API.models
         public string Title { get; set; }
         public string datum { get; set; }
         public int PersonID { get; set; }
+        public int? CategoryID { get; set; }
+        public bool Show { get; set; }
 
         [ForeignKey("PersonID")]
         public virtual Person Person { get; set; }
+
+        [ForeignKey("CategoryID")]
+        public virtual Category Category { get; set; }
 
     }
 }
