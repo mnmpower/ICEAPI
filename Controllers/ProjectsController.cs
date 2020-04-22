@@ -22,10 +22,18 @@ namespace ICE_API.Controllers
         }
 
         // GET: api/Projects
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
         {
             return await _context.Projects.ToListAsync();
+        }
+
+        // GET: api/Projects/whereShowIsTrue
+        [HttpGet("whereShowIsTrue")]
+        public async Task<ActionResult<IEnumerable<Project>>> getProjectsWhereShowIsTrue()
+        {
+            return await _context.Projects.Where(p => p.Show == true).ToListAsync();
         }
 
         // GET: api/Projects/5

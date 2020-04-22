@@ -12,49 +12,49 @@ namespace ICE_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PeopleController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public PeopleController(DataContext context)
+        public CategoriesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/People
+        // GET: api/Categories
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.People.ToListAsync();
+            return await _context.Categories.ToListAsync();
         }
 
-        // GET: api/People/5
+        // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(int id)
+        public async Task<ActionResult<Category>> GetCategory(int id)
         {
-            var person = await _context.People.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
 
-            if (person == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return category;
         }
 
-        // PUT: api/People/5
+        // PUT: api/Categories/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson(int id, Person person)
+        public async Task<IActionResult> PutCategory(int id, Category category)
         {
-            if (id != person.PersonID)
+            if (id != category.CategoryID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(category).State = EntityState.Modified;
 
             try
             {
@@ -62,7 +62,7 @@ namespace ICE_API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PersonExists(id))
+                if (!CategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -75,37 +75,37 @@ namespace ICE_API.Controllers
             return NoContent();
         }
 
-        // POST: api/People
+        // POST: api/Categories
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Person>> PostPerson(Person person)
+        public async Task<ActionResult<Category>> PostCategory(Category category)
         {
-            _context.People.Add(person);
+            _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPerson", new { id = person.PersonID }, person);
+            return CreatedAtAction("GetCategory", new { id = category.CategoryID }, category);
         }
 
-        // DELETE: api/People/5
+        // DELETE: api/Categories/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Person>> DeletePerson(int id)
+        public async Task<ActionResult<Category>> DeleteCategory(int id)
         {
-            var person = await _context.People.FindAsync(id);
-            if (person == null)
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            _context.People.Remove(person);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
 
-            return person;
+            return category;
         }
 
-        private bool PersonExists(int id)
+        private bool CategoryExists(int id)
         {
-            return _context.People.Any(e => e.PersonID == id);
+            return _context.Categories.Any(e => e.CategoryID == id);
         }
     }
 }
