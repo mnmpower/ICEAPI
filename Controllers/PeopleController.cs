@@ -30,6 +30,7 @@ namespace ICE_API.Controllers
         }
 
         // GET: api/People/5
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Person>> GetPerson(int id)
         {
@@ -46,6 +47,7 @@ namespace ICE_API.Controllers
         // PUT: api/People/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPerson(int id, Person person)
         {
@@ -88,6 +90,7 @@ namespace ICE_API.Controllers
         }
 
         // DELETE: api/People/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Person>> DeletePerson(int id)
         {
