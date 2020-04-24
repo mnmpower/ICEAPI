@@ -12,51 +12,60 @@ namespace ICE_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class InitiatifsController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public CategoriesController(DataContext context)
+        public InitiatifsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Categories
+        // GET: api/Initiatifs
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<Initiatif>>> GetInitiatifs()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Initiatifs.ToListAsync();
         }
 
-        // GET: api/Categories/5
+
+
+        // GET: api/Initiatifs/whereShowIsTrue
+        [HttpGet("whereShowIsTrue")]
+        public async Task<ActionResult<IEnumerable<Initiatif>>> getProjectsWhereShowIsTrue()
+        {
+            return await _context.Initiatifs.Where(i => i.Confirmed == true).ToListAsync();
+        }
+
+        // GET: api/Initiatifs/5
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<Initiatif>> GetInitiatif(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var initiatif = await _context.Initiatifs.FindAsync(id);
 
-            if (category == null)
+            if (initiatif == null)
             {
                 return NotFound();
             }
 
-            return category;
+            return initiatif;
         }
 
-        // PUT: api/Categories/5
+        // PUT: api/Initiatifs/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<IActionResult> PutInitiatif(int id, Initiatif initiatif)
         {
-            if (id != category.CategoryID)
+            if (id != initiatif.InitiatifID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(category).State = EntityState.Modified;
+            _context.Entry(initiatif).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +73,7 @@ namespace ICE_API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(id))
+                if (!InitiatifExists(id))
                 {
                     return NotFound();
                 }
@@ -77,39 +86,38 @@ namespace ICE_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Categories
+        // POST: api/Initiatifs
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<ActionResult<Initiatif>> PostInitiatif(Initiatif initiatif)
         {
-            _context.Categories.Add(category);
+            _context.Initiatifs.Add(initiatif);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.CategoryID }, category);
+            return CreatedAtAction("GetInitiatif", new { id = initiatif.InitiatifID }, initiatif);
         }
 
-        // DELETE: api/Categories/5
+        // DELETE: api/Initiatifs/5
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Category>> DeleteCategory(int id)
+        public async Task<ActionResult<Initiatif>> DeleteInitiatif(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var initiatif = await _context.Initiatifs.FindAsync(id);
+            if (initiatif == null)
             {
                 return NotFound();
             }
 
-            _context.Categories.Remove(category);
+            _context.Initiatifs.Remove(initiatif);
             await _context.SaveChangesAsync();
 
-            return category;
+            return initiatif;
         }
 
-        private bool CategoryExists(int id)
+        private bool InitiatifExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryID == id);
+            return _context.Initiatifs.Any(e => e.InitiatifID == id);
         }
     }
 }

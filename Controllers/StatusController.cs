@@ -12,51 +12,51 @@ namespace ICE_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class StatusController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public CategoriesController(DataContext context)
+        public StatusController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Categories
+        // GET: api/Status
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<Status>>> GetStatuses()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Statuses.ToListAsync();
         }
 
-        // GET: api/Categories/5
+        // GET: api/Status/5
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<Status>> GetStatus(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var status = await _context.Statuses.FindAsync(id);
 
-            if (category == null)
+            if (status == null)
             {
                 return NotFound();
             }
 
-            return category;
+            return status;
         }
 
-        // PUT: api/Categories/5
+        // PUT: api/Status/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<IActionResult> PutStatus(int id, Status status)
         {
-            if (id != category.CategoryID)
+            if (id != status.StatusID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(category).State = EntityState.Modified;
+            _context.Entry(status).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +64,7 @@ namespace ICE_API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(id))
+                if (!StatusExists(id))
                 {
                     return NotFound();
                 }
@@ -77,39 +77,40 @@ namespace ICE_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Categories
+        // POST: api/Status
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<ActionResult<Status>> PostStatus(Status status)
         {
-            _context.Categories.Add(category);
+            _context.Statuses.Add(status);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.CategoryID }, category);
+            return CreatedAtAction("GetStatus", new { id = status.StatusID }, status);
         }
 
-        // DELETE: api/Categories/5
+        // DELETE: api/Status/5
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Category>> DeleteCategory(int id)
+        public async Task<ActionResult<Status>> DeleteStatus(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var status = await _context.Statuses.FindAsync(id);
+            if (status == null)
             {
                 return NotFound();
             }
 
-            _context.Categories.Remove(category);
+            _context.Statuses.Remove(status);
             await _context.SaveChangesAsync();
 
-            return category;
+            return status;
         }
-
-        private bool CategoryExists(int id)
+        
+        [Authorize]
+        private bool StatusExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryID == id);
+            return _context.Statuses.Any(e => e.StatusID == id);
         }
     }
 }

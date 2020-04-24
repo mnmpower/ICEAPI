@@ -132,7 +132,7 @@ namespace ICE_API.models
                     TaskDescription = "korte omschrijving van een team dat iets doet",
                     Confirmed = false,
                     location = "Geel",
-                    PersonID = 1,
+                    PersonID = 2,
                     CategoryID = 1,
                     StatusID = 1
                 });
@@ -142,6 +142,26 @@ namespace ICE_API.models
             else
             {
                 System.Console.WriteLine("Initiatifs already seeded ...");
+            }
+
+
+            if (!context.chalanges.Any())
+            {
+                System.Console.WriteLine("No Chalanges found - seeding Chalanges in DB ...");
+                context.chalanges.AddRange(
+                new Chalange
+                {
+                    Text= "Maak een driegangenmenu voor iemand van jouw famillie.Maak een leuke " +
+      "sfeerfoto tijdens elke menugang van het eten en stuur deze door. Wij maken van alle inzendingen een leuk " +
+      "filmpje zodat je ook kan zien wat andere mensen gedaan hebben.",
+                    Active= true
+                });
+                context.SaveChanges();
+
+            }
+            else
+            {
+                System.Console.WriteLine("Chalanges already seeded ...");
             }
 
             System.Console.WriteLine("Checking completed...");

@@ -15,6 +15,7 @@ namespace ICE_API.models
         public DbSet<Person> People { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Initiatif> Initiatifs { get; set; }
+        public DbSet<Chalange> chalanges { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,6 +26,7 @@ namespace ICE_API.models
             modelBuilder.Entity<Person>().ToTable("Person");
             modelBuilder.Entity<Project>().ToTable("Project");
             modelBuilder.Entity<Initiatif>().ToTable("Initiatif");
+            modelBuilder.Entity<Chalange>().ToTable("Chalange");
         }
 
     }
