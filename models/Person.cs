@@ -11,7 +11,9 @@ namespace ICE_API.models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public bool DIY { get; set; }
 
+        
         public ICollection<Project> Projects { get; set; }
         public ICollection<Initiatif> Initiatifs { get; set; }
     }

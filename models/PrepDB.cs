@@ -67,6 +67,41 @@ namespace ICE_API.models
                 System.Console.WriteLine("Statuses already seeded ...");
             }
 
+            if (!context.Durations.Any())
+            {
+                System.Console.WriteLine("No Durations found - seeding Durations in DB ...");
+
+                context.Durations.AddRange(
+                new Duration { name = "0 - 5 min" },
+                new Duration { name = "5 - 15 min" },
+                new Duration { name = "15 - 30 min" },
+                new Duration { name = "30 - 60 min" },
+                new Duration { name = "60+ min" }
+                );
+                context.SaveChanges();
+            }
+            else
+            {
+                System.Console.WriteLine("Durations already seeded ...");
+            }
+
+            if (!context.AgeCategories.Any())
+            {
+                System.Console.WriteLine("No AgeCategories found - seeding AgeCategories in DB ...");
+
+                context.AgeCategories.AddRange(
+                new AgeCategory { name = "Kleuters" },
+                new AgeCategory { name = "Lagere school" },
+                new AgeCategory { name = "Middelbare  school" },
+                new AgeCategory { name = "Volwassenen" }
+                );
+                context.SaveChanges();
+            }
+            else
+            {
+                System.Console.WriteLine("AgeCategories already seeded ...");
+            }
+
             if (!context.Categories.Any())
             {
                 System.Console.WriteLine("No Categories found - seeding Categories in DB ...");
@@ -86,8 +121,8 @@ namespace ICE_API.models
             {
                 System.Console.WriteLine("No People found - seeding Peoples in DB ...");
                 context.People.AddRange(
-                new Person { FirstName = "Maarten", LastName = "Michiels", Email = "m@m.be" },
-                new Person { FirstName = "Benji", LastName = "Virus", Email = "m@m.be" }
+                new Person { FirstName = "Maarten", LastName = "Michiels", Email = "m@m.be", DIY=true },
+                new Person { FirstName = "Benji", LastName = "Virus", Email = "m@m.be", DIY=false }
                 );
                 context.SaveChanges();
             }
@@ -109,7 +144,9 @@ namespace ICE_API.models
                     datum = "13/03/2020",
                     PersonID = 1,
                     CategoryID = 1,
-                    Show = true
+                    Show = true,
+                    AgeCategoryID = 1,
+                    DurationID = 2
                 });
                 context.SaveChanges();
 

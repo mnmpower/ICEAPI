@@ -33,7 +33,11 @@ namespace ICE_API.Controllers
         [HttpGet("whereShowIsTrue")]
         public async Task<ActionResult<IEnumerable<Project>>> getProjectsWhereShowIsTrue()
         {
-            return await _context.Projects.Where(p => p.Show == true).ToListAsync();
+            return await _context.Projects
+                .Where(p => p.Show == true)
+                .Include(p => p.AgeCategory)
+                .Include(p => p.Duration)
+                .ToListAsync();
         }
 
         // GET: api/Projects/5
@@ -94,6 +98,41 @@ namespace ICE_API.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProject", new { id = project.ProjectID }, project);
+        }
+
+        // POST: api/Projects/zoek
+        [HttpPost("zoek")]
+        public async Task<ActionResult<IEnumerable<Project>>> ZoekProjecten(ZoekProject zp)
+        {
+            List<Project> projecten = new List<Project>();
+            projecten = await _context.Projects.Where(p => p.Show == true)
+                .Include(p => p.AgeCategory)
+                .Include(p => p.Duration)
+                .ToListAsync();
+
+            if (zp.CategoryID != 0)
+            {
+                projecten = projecten.Where(p => p.CategoryID == zp.CategoryID).ToList(); ;
+            }
+
+            if (zp.PersonID != 0)
+            {
+                projecten = projecten.Where(p => p.PersonID == zp.PersonID).ToList(); ;
+            }
+
+            if (zp.AgeCategoryID != 0)
+            {
+                projecten = projecten.Where(p => p.AgeCategoryID == zp.AgeCategoryID).ToList(); ;
+            }
+
+            if (zp.DurationID != 0)
+            {
+                projecten = projecten.Where(p => p.DurationID == zp.DurationID).ToList(); ;
+            }
+
+
+            return projecten;
+
         }
 
         // DELETE: api/Projects/5

@@ -4,14 +4,16 @@ using ICE_API.models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ICE_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200428112927_addedTime+Age-Project")]
+    partial class addedTimeAgeProject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,21 +43,6 @@ namespace ICE_API.Migrations
                     b.HasKey("AdminID");
 
                     b.ToTable("Admin");
-                });
-
-            modelBuilder.Entity("ICE_API.models.AgeCategory", b =>
-                {
-                    b.Property<int>("AgeCategoryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AgeCategoryID");
-
-                    b.ToTable("AgeCategory");
                 });
 
             modelBuilder.Entity("ICE_API.models.Category", b =>
@@ -89,21 +76,6 @@ namespace ICE_API.Migrations
                     b.HasKey("ChalangeID");
 
                     b.ToTable("Chalange");
-                });
-
-            modelBuilder.Entity("ICE_API.models.Duration", b =>
-                {
-                    b.Property<int>("DurationID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DurationID");
-
-                    b.ToTable("Duration");
                 });
 
             modelBuilder.Entity("ICE_API.models.Initiatif", b =>
@@ -185,17 +157,14 @@ namespace ICE_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AgeCategoryID")
-                        .HasColumnType("int");
+                    b.Property<string>("Age")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CategoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DurationID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Img")
                         .HasColumnType("nvarchar(max)");
@@ -209,6 +178,9 @@ namespace ICE_API.Migrations
                     b.Property<bool>("Show")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Time")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -217,11 +189,7 @@ namespace ICE_API.Migrations
 
                     b.HasKey("ProjectID");
 
-                    b.HasIndex("AgeCategoryID");
-
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("DurationID");
 
                     b.HasIndex("PersonID");
 
@@ -266,17 +234,9 @@ namespace ICE_API.Migrations
 
             modelBuilder.Entity("ICE_API.models.Project", b =>
                 {
-                    b.HasOne("ICE_API.models.AgeCategory", "AgeCategory")
-                        .WithMany()
-                        .HasForeignKey("AgeCategoryID");
-
                     b.HasOne("ICE_API.models.Category", "Category")
                         .WithMany("Projects")
                         .HasForeignKey("CategoryID");
-
-                    b.HasOne("ICE_API.models.Duration", "Duration")
-                        .WithMany()
-                        .HasForeignKey("DurationID");
 
                     b.HasOne("ICE_API.models.Person", "Person")
                         .WithMany("Projects")

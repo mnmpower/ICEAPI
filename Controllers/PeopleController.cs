@@ -29,6 +29,13 @@ namespace ICE_API.Controllers
             return await _context.People.ToListAsync();
         }
 
+        // GET: api/People/diy
+        [HttpGet("diy")]
+        public async Task<ActionResult<IEnumerable<Person>>> GetPeopleWhereDiy()
+        {
+            return await _context.People.Where(p => p.DIY == true).ToListAsync();
+        }
+
         // GET: api/People/5
         [Authorize]
         [HttpGet("{id}")]
