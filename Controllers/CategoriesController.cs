@@ -22,7 +22,6 @@ namespace ICE_API.Controllers
         }
 
         // GET: api/Categories
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
