@@ -51,6 +51,20 @@ namespace ICE_API.Controllers
             return person;
         }
 
+        // GET: api/People/ForUsers/5
+        [HttpGet("ForUsers/{id}")]
+        public async Task<ActionResult<Person>> GetPersonForUsers(int id)
+        {
+            var person = await _context.People.FindAsync(id);
+
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            return person;
+        }
+
         // PUT: api/People/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.

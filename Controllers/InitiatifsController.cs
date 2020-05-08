@@ -35,7 +35,12 @@ namespace ICE_API.Controllers
         [HttpGet("whereShowIsTrue")]
         public async Task<ActionResult<IEnumerable<Initiatif>>> getProjectsWhereShowIsTrue()
         {
-            return await _context.Initiatifs.Where(i => i.Confirmed == true).ToListAsync();
+            return await _context.Initiatifs
+                .Where(i => i.Confirmed == true)
+                .Include(i=> i.Person)
+                .Include(i=> i.Category)
+                .Include(i=> i.Status)
+                .ToListAsync();
         }
 
         // GET: api/Initiatifs/5
@@ -44,6 +49,24 @@ namespace ICE_API.Controllers
         public async Task<ActionResult<Initiatif>> GetInitiatif(int id)
         {
             var initiatif = await _context.Initiatifs.FindAsync(id);
+
+            if (initiatif == null)
+            {
+                return NotFound();
+            }
+
+            return initiatif;
+        }
+
+        // GET: api/Initiatifs/ForUsers/5
+        [HttpGet("ForUsers/{id}")]
+        public async Task<ActionResult<Initiatif>> GetInitiatifForUsers(int id)
+        {
+            var initiatif = await _context.Initiatifs
+                .Include(i => i.Person)
+                .Include(i => i.Category)
+                .Include(i => i.Status)
+                .FirstAsync();
 
             if (initiatif == null)
             {
